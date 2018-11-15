@@ -17,4 +17,9 @@
     <string name="response">ListItemsActivity 传递: 我分享的信息</string>
     <string name="Button2Text">开始聊天</string>
     <string name="Button3Text">发送</string>
+    <string name="minTemp">最低温度: </string>
+    <string name="maxTemp">最高温度: </string>
+    <string name="windSpeed">风速:</string>
+    <string name="currentTemp">现在的温度： </string>
+    <string name="weatherText">天气预报</string>
 </resources>

@@ -16,6 +16,11 @@
     <string name="response">ListItemsActivity passed: My information to share</string>
     <string name="Button2Text">Start Chat</string>
     <string name="Button3Text">Send</string>
+    <string name="minTemp">minTemp: </string>
+    <string name="maxTemp">maxTemp: </string>
+    <string name="windSpeed">windSpeed: </string>
+    <string name="currentTemp">currentTemp: </string>
+    <string name="weatherText">Weather Forecast</string>
 
 
 </resources>
