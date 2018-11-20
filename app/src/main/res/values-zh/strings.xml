@@ -22,4 +22,7 @@
     <string name="windSpeed">风速:</string>
     <string name="currentTemp">现在的温度： </string>
     <string name="weatherText">天气预报</string>
+    <string name="fragmentMessage">信息是</string>
+    <string name="fragmentID">ID 是 </string>
+    <string name="fragmentDeleteButton">删除信息！</string>
 </resources>

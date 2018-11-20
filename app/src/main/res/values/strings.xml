@@ -21,6 +21,10 @@
     <string name="windSpeed">windSpeed: </string>
     <string name="currentTemp">currentTemp: </string>
     <string name="weatherText">Weather Forecast</string>
+    <string name="fragmentMessage">Message Here</string>
+    <string name="fragmentID">ID = </string>
+    <string name="fragmentDeleteButton">DELETE THIS MESSAGE</string>
+
 
 
 </resources>
