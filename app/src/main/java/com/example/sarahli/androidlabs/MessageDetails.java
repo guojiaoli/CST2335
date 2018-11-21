@@ -16,7 +16,7 @@ public class MessageDetails extends Activity {
         Intent intent = getIntent();
         MessageFragment fragment = new MessageFragment();
         Bundle bundle = new Bundle();
-        bundle.putLong("ID",((Intent) intent).getLongExtra("ID",99));
+        bundle.putLong("ID",((Intent) intent).getLongExtra("ID",-1));
         bundle.putString("message",intent.getStringExtra("message"));
         bundle.getBoolean("phone",true);
         fragment.setArguments(bundle);

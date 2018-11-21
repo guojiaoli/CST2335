@@ -1,6 +1,7 @@
 package com.example.sarahli.androidlabs;
 
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +21,9 @@ public class MessageFragment extends Fragment {
     TextView messageID;
     Button deleteMessageButton;
 
+    private long passedId;
+    private String passedMsg;
+    private boolean passedTablet;
 
     public MessageFragment() {
 
@@ -40,38 +44,35 @@ public class MessageFragment extends Fragment {
 
         messageText = (TextView)view.findViewById(R.id.fragmentMessage);
         messageID =(TextView)view.findViewById(R.id.fragmentID);
+
         deleteMessageButton =(Button)view.findViewById(R.id.fragmentDeleteButton);
-        messageID.setText(Long.toString(messageBundle.getLong("ID")));
-        messageText.setText(messageBundle.getString("message"));
+
+        passedId = messageBundle.getLong("MessageID");
+        messageID.setText(Long.toString(passedId));
+
+        passedMsg = messageBundle.getString("Message");
+        messageText.setText(passedMsg);
+
+        passedTablet = messageBundle.getBoolean("isTablet");
 
 
         deleteMessageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isPhone()){
-                    Intent intent = new Intent(getActivity(),ChatWindow.class);
-                    intent.putExtra("delete",messageBundle.getLong("ID"));
-                    MessageDetails md = (MessageDetails)getActivity();
-                    md.setResult(-1,intent);
-                    md.finish();
-                }else{
+                if(passedTablet){
                     ChatWindow chatWindow = (ChatWindow) getActivity();
-                    chatWindow.deleteMessage(messageBundle.getLong("ID"));
+                    chatWindow.deleteMessage(passedId);
                     getFragmentManager().beginTransaction().remove(MessageFragment.this).commit();
+                }else{
+                    Intent intent = new Intent();
+                    intent.putExtra("id", passedId);
+                    MessageDetails md = (MessageDetails)getActivity();
+                    md.setResult(Activity.RESULT_OK, intent);
+                    md.finish();
                 }
             }
         });
 
         return view;
     }
-
-    public boolean isPhone(){
-        if(messageBundle.getBoolean("phone"))
-         return true;
-        else
-            return false;
-    }
-
-
-
 }

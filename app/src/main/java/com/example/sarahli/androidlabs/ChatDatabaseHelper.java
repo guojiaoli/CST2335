@@ -41,7 +41,7 @@ public class ChatDatabaseHelper extends SQLiteOpenHelper {
         final SQLiteDatabase db = getWritableDatabase();
         final List<MessageResult> messageResults = new ArrayList<>();
         final Cursor cursor = db.query(TABLE_NAME, ALL_COLUMNS, null, null, null, null, null, null);
-
+        cursor.moveToFirst();
         Log.i(TAG, "Cursor's  column count =" + cursor.getColumnCount());
 
         if(cursor != null) {

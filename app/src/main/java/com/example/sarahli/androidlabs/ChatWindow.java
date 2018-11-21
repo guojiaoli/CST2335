@@ -26,28 +26,24 @@ import java.util.List;
 public class ChatWindow extends Activity {
     protected static final String ACTIVITY_NAME = "ChatWindow";
 
-    List<MessageResult> arrayList;
+    ArrayList<MessageResult> arrayList;
     ChatDatabaseHelper cdh;
     SQLiteDatabase db;
     Cursor cursor;
     ChatAdapter messageAdapter;
     ListView listView;
-    boolean isLoaded;
+    boolean isTablet;
     FrameLayout frameLayout;
     EditText editText2;
     String input;
+    MessageResult messageResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_window);
 
-        frameLayout = (FrameLayout)findViewById(R.id.frameLayout);
-        if(frameLayout != null){
-           isLoaded = true;
-        } else {
-            isLoaded = false;
-        }
+        isTablet = findViewById(R.id.frameLayout) != null;
 
         cdh = new ChatDatabaseHelper(this);
 
@@ -57,7 +53,7 @@ public class ChatWindow extends Activity {
         messageAdapter = new ChatAdapter(this);
 
         db = cdh.getReadableDatabase();
-        arrayList = cdh.getAllMessage();
+        arrayList = (ArrayList<MessageResult>) cdh.getAllMessage();
 
         listView.setAdapter(messageAdapter);
 
@@ -66,7 +62,7 @@ public class ChatWindow extends Activity {
             public void onClick(View v) {
                 input = editText2.getText().toString();
 
-                MessageResult messageResult = new MessageResult(-1, input);
+                messageResult = new MessageResult(-1, input);
                 arrayList.add(messageResult);
                 messageAdapter.notifyDataSetChanged();
                 /*
@@ -88,12 +84,13 @@ public class ChatWindow extends Activity {
                 String item = adapterView.getItemAtPosition(position).toString();
                 Long messageId = adapterView.getItemIdAtPosition(position);
                 //Use a Bundle to pass the message string, and the database id of the selected item to the fragment in the FragmentTransaction
-                if(frameLayout != null) {
+                if(isTablet) {
                     MessageFragment messageFragment = new MessageFragment();
                     Bundle bundle = new Bundle();
                     bundle.putString("Message", item);
-                    bundle.putString("MessageID", messageId + "");
-                    bundle.putBoolean("isTablet", true);
+                    bundle.putLong("MessageID", messageId);
+                    bundle.putBoolean("isTablet", isTablet);
+
                     messageFragment.setArguments(bundle);
                     FragmentTransaction fragmentTransaction =  getFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.frameLayout, messageFragment);
@@ -106,7 +103,7 @@ public class ChatWindow extends Activity {
                     Intent intent = new Intent(ChatWindow.this, MessageDetails.class);
                     intent.putExtra("Message", item);
                     intent.putExtra("MessageID", messageId + "");
-                    startActivityForResult(intent, 1);
+                    startActivityForResult(intent, 10);
 
                     Log.i(ACTIVITY_NAME, "Run on Phone");
                 }
@@ -140,7 +137,7 @@ public class ChatWindow extends Activity {
 
         @Override
         public long getItemId(int position) {
-            return getItem(position).getId();
+            return arrayList.get(position).getId();
         }
 
         @Override
@@ -168,14 +165,13 @@ public class ChatWindow extends Activity {
     }
 
     public void deleteMessage(long id) {
-        db = cdh.getWritableDatabase();
-        db.delete(cdh.TABLE_NAME, cdh.ID + " = ?", new String[]{String.valueOf(id)});
-        arrayList.remove((int)id);
-        cursor = db.rawQuery("SELECT * FROM " + cdh.TABLE_NAME + ";", null);
-        cursor.moveToFirst();
+//        db = cdh.getWritableDatabase();
+        final int deleted = db.delete(cdh.TABLE_NAME, cdh.ID + " = ?", new String[]{String.valueOf(id)});
+        arrayList.clear();
+//        cursor = db.rawQuery("SELECT * FROM " + cdh.TABLE_NAME + ";", null);
+//        cursor.moveToFirst();
         cdh.getAllMessage();
+        arrayList.add(messageResult);
         messageAdapter.notifyDataSetChanged();
-
-
     }
 }
