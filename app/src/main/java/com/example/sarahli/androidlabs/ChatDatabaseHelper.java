@@ -13,7 +13,7 @@ import java.util.List;
 public class ChatDatabaseHelper extends SQLiteOpenHelper {
     private static final String TAG = "ChatDatabaseHelper";
     public static String DATABASE_NAME = "messageDase";
-    public static int VERSION_NUM = 2;
+    public static int VERSION_NUM = 3;
     public String TABLE_NAME = "message";
     public String ID = "_id";
     public String MESSAGE = "message";

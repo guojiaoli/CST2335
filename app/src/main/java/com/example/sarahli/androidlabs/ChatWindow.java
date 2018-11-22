@@ -61,16 +61,18 @@ public class ChatWindow extends Activity {
             @Override
             public void onClick(View v) {
                 input = editText2.getText().toString();
-
-                messageResult = new MessageResult(-1, input);
+                ContentValues contentValues = new ContentValues();
+                contentValues.put(cdh.MESSAGE, input);
+                db.insert(cdh.TABLE_NAME, "null", contentValues);
+                Cursor c = db.rawQuery("select * from " + cdh.TABLE_NAME + ";", null);
+                c.moveToLast();
+                long newId = c.getLong(c.getColumnIndex(cdh.ID));
+                messageResult = new MessageResult(newId, input);
                 arrayList.add(messageResult);
                 messageAdapter.notifyDataSetChanged();
                 /*
                 SQLiteDatabase db = cdh.getWritableDatabase();
                 */
-                ContentValues contentValues = new ContentValues();
-                contentValues.put(cdh.MESSAGE, input);
-                db.insert(cdh.TABLE_NAME, "null", contentValues);
 
                 editText2.setText("");
 
@@ -102,7 +104,7 @@ public class ChatWindow extends Activity {
                 } else {
                     Intent intent = new Intent(ChatWindow.this, MessageDetails.class);
                     intent.putExtra("Message", item);
-                    intent.putExtra("MessageID", messageId + "");
+                    intent.putExtra("MessageID", messageId );
                     startActivityForResult(intent, 10);
 
                     Log.i(ACTIVITY_NAME, "Run on Phone");
@@ -170,8 +172,8 @@ public class ChatWindow extends Activity {
         arrayList.clear();
 //        cursor = db.rawQuery("SELECT * FROM " + cdh.TABLE_NAME + ";", null);
 //        cursor.moveToFirst();
-        cdh.getAllMessage();
-        arrayList.add(messageResult);
+        //cdh.getAllMessage();
+        arrayList.addAll(cdh.getAllMessage());
         messageAdapter.notifyDataSetChanged();
     }
 }
