@@ -24,7 +24,11 @@
     <string name="fragmentMessage">Message Here</string>
     <string name="fragmentID">ID = </string>
     <string name="fragmentDeleteButton">DELETE THIS MESSAGE</string>
-
+    <string name="testToolbarButton">TEST TOOLBAR</string>
+    <string name="toolbarButton">Snackbar</string>
+    <string name="toolbar_choice_two_title">Do you want to go back? </string>
+    <string name="newMessageTitle">What is your new message? </string>
+    <string name="newMessage">Type here</string>
 
 
 </resources>

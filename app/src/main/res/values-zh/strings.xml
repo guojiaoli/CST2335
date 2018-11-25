@@ -25,4 +25,9 @@
     <string name="fragmentMessage">信息是</string>
     <string name="fragmentID">ID 是 </string>
     <string name="fragmentDeleteButton">删除信息！</string>
+    <string name="testToolbarButton">测试工具栏</string>
+    <string name="toolbarButton">通知</string>
+    <string name="toolbar_choice_two_title">要返回上一页么？ </string>
+    <string name="newMessageTitle">什么新信息？ </string>
+    <string name="newMessage">在这输入</string>
 </resources>

@@ -20,13 +20,13 @@
         />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/buttonButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/ButtonText" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/chatButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/Button2Text"/>
@@ -36,5 +36,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/weatherText"/>
+
+    <Button
+        android:id="@+id/testToolbarButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/testToolbarButton"/>
 
 </LinearLayout>

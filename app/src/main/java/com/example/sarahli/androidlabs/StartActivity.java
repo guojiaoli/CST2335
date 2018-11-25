@@ -1,9 +1,7 @@
 package com.example.sarahli.androidlabs;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +10,10 @@ import android.widget.Toast;
 
 public class StartActivity extends Activity {
     protected static final String ACTIVITY_NAME = "StartActivity";
+    Button buttonButton;
+    Button chatButton;
+    Button weatherButton;
+    Button testToolbarButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,9 +21,9 @@ public class StartActivity extends Activity {
         Log.i(ACTIVITY_NAME,"In onCreate()");
         setContentView(R.layout.activity_start);
 
-        Button b2 = (Button)findViewById(R.id.button2);
+        buttonButton = (Button)findViewById(R.id.buttonButton);
 
-        b2.setOnClickListener(new View.OnClickListener() {
+        buttonButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View vw) {
 
@@ -30,8 +32,8 @@ public class StartActivity extends Activity {
             }
         });
 
-        Button b3 = (Button)findViewById(R.id.button3);
-        b3.setOnClickListener(new View.OnClickListener() {
+        chatButton = (Button)findViewById(R.id.chatButton);
+        chatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View vw) {
                 Log.i(ACTIVITY_NAME,"User clicked Start Chat");
@@ -40,12 +42,22 @@ public class StartActivity extends Activity {
             }
         });
 
-        Button weatherButton = (Button)findViewById(R.id.weatherButton);
+        weatherButton = (Button)findViewById(R.id.weatherButton);
         weatherButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View vw) {
                 Log.i(ACTIVITY_NAME,"User clicked Weather Forecast");
                 Intent nextScreen = new Intent(StartActivity.this, WeatherForecast.class);
+                startActivity(nextScreen);
+            }
+        });
+
+        testToolbarButton = (Button)findViewById(R.id.testToolbarButton);
+        testToolbarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View vw) {
+                Log.i(ACTIVITY_NAME,"User clicked Test ToolBar");
+                Intent nextScreen = new Intent(StartActivity.this, TestToolbar.class);
                 startActivity(nextScreen);
             }
         });
